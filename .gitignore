@@ -99,3 +99,6 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+cifar10/
+dogs/
