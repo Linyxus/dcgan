@@ -6,9 +6,9 @@ __author__ = 'Linyxus'
 from scipy.io import loadmat
 
 def read_list(filename):
-    data = loadmat(filename)
-    print(data)
+    data = loadmat(filename)['file_list']
+    return [x[0][0] for x in data]
 
 
 if __name__ == '__main__':
-    read_list('../dogs/file_list.mat')
+    print(read_list('../dogs/file_list.mat'))

@@ -29,21 +29,21 @@ def _load_meta(filename):
     meta = [x.decode('ascii') for x in meta]
     return meta
 
-def load():
+def load(path):
     dict = {}
-    data = _load_batch('cifar10/data_batch_1')
+    data = _load_batch('%s/data_batch_1' % path)
     imgs, labels = data['img'], data['label']
     for x in [2, 3, 4, 5]:
-        filename = 'cifar10/data_batch_%d' % x
+        filename = '%s/data_batch_%d' % (path, x)
         data = _load_batch(filename)
         imgs = np.concatenate((imgs, data['img']))
         labels = np.concatenate((labels, data['label']))
     dict['img'] = imgs / 255
     dict['label'] = labels
-    dict['meta'] = _load_meta('cifar10/batches.meta')
+    dict['meta'] = _load_meta('%s/batches.meta' % path)
     return dict
 
 if __name__ == '__main__':
-    data = load()
+    data = load('../cifar10')
     print(data)
     print(data['img'].shape, data['label'].shape, data['meta'])

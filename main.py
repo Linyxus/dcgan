@@ -6,7 +6,7 @@ import dcgan
 
 if __name__ == '__main__':
     print('*** DCGAN trained with cifar10 ***')
-    data = dataloader.cifar10.load()['img']
+    data = dataloader.cifar10.load('cifar10')['img']
     model = dcgan.DCGAN(data)
     try:
         model.train(steps=3000)
