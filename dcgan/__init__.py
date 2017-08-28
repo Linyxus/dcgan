@@ -38,7 +38,7 @@ def save_images(images, idx, dim=4):
         plt.imshow(img)
         plt.axis('off')
     plt.tight_layout()
-    plt.savefig('cifar_dcgan_%s.jpg' % idx)
+    plt.savefig('dcgan_%s.jpg' % idx)
 
 class DCGAN(object):
     def __init__(self, data):
@@ -142,7 +142,7 @@ class DCGAN(object):
         for i in range(steps):
             real_img = self.real_images[np.random.randint(0, self.real_images.shape[0], size=batch_size)]
             # noise = np.random.uniform(-1.0, 1.0, size=(batch_size, 100))
-            noise = np.random.uniform(0.0, 1.0, size=(batch_size, 100))
+            noise = np.random.normal(0.0, 1.0, size=(batch_size, 100))
             fake_img = self.G.predict(noise)
             x = np.concatenate((real_img, fake_img))
             y = np.ones((2*batch_size, 1))
@@ -150,7 +150,7 @@ class DCGAN(object):
             d_loss = self.DM.train_on_batch(x, y)
 
             # x = np.random.uniform(-1.0, 1.0, size=(batch_size, 100))
-            x = np.random.uniform(0.0, 1.0, size=(batch_size, 100))
+            x = np.random.normal(0.0, 1.0, size=(batch_size, 100))
             y = np.ones((batch_size, 1))
             a_loss = self.AM.train_on_batch(x, y)
 
@@ -169,13 +169,13 @@ class DCGAN(object):
 
     def plot_fake(self, sample=9, dim=3):
         # noise = np.random.uniform(-1.0, 1.0, size=(sample, 100))
-        noise = np.random.uniform(0.0, 1.0, size=(sample, 100))
+        noise = np.random.normal(0.0, 1.0, size=(sample, 100))
         images = self.G.predict(noise)
         plot_images(images, dim=dim)
 
     def save_fake(self, idx, sample=9, dim=3):
         # noise = np.random.uniform(-1.0, 1.0, size=(sample, 100))
-        noise = np.random.uniform(0.0, 1.0, size=(sample, 100))
+        noise = np.random.normal(0.0, 1.0, size=(sample, 100))
         images = self.G.predict(noise)
         save_images(images, idx, dim=dim)
 
